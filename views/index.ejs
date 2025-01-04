@@ -1,57 +1,57 @@
 <%- include('partials/header.ejs') %>
-
-  <body>
-    <div class="pc">
-      <!-- main section -->
-      <div id="screen">
-        <!-- city name -->
-        <div class="city-name">
-          <i class="fa-solid fa-map-pin"></i>
-          <h1 id="city-name">Nelson</h1>
+<body>
+  <div class="pc">
+    <div id="screen">
+      <div class="city-name">
+        <i class="fa-solid fa-map-pin"></i>
+        <h1 id="city-name"><%= currentWeather.city %></h1>
+      </div>
+      <div class="weather-icon-css">
+        <img class="weather-icon" src="images/sun.png" />
+      </div>
+      <div class="weather-description">
+        <div class="show-metric" id="metric"><%= currentWeather.temp %></div>
+        <div class="weather-details">
+          <div class="weather-main" id="weather-main"><%= currentWeather.description %></div>
+          <div class="h-f">
+            <div class="show-humidity">H: <span id="humidity"><%= currentWeather.humidity %></span></div>
+            ||
+            <div class="show-humidity">F: <span id="feels-like"><%= currentWeather.feels_like %></span></div>
+          </div>
         </div>
-        <!-- weather icon -->
-        <div class="weather-icon-css">
-          <img class="weather-icon" src="images/sun.png" />
+      </div>
+      <div class="forcasts-box">
+        <div class="today-forecast">
+          <h4>TODAY</h4>
+          <div class="weather-icon-today">
+            <img class="weather-icons" src="images/sun.png" />
+          </div>
+          <div class="temp-today">
+            <span id="temp-min-today"><%= currentWeather.temp_min %></span>/<span id="temp-max-today"><%= currentWeather.temp_max %></span>
+          </div>
+          <div class="weather-main-today" id="weather-main"><%= currentWeather.description %></div>
         </div>
-        <!-- weather details -->
-        <div class="weather-description">
-          <div class="show-metric" id="metric">0°</div>
-          <div class="weather-details">
-            <div class="weather-main" id="weather-main">Sunnen</div>
-            <div class="h-f">
-              <div class="show-humidity">H: <span id="humidity">60</span></div>
-              ||
-              <div class="show-humidity">
-                F: <span id="feels-like">60</span>
+        <div class="forecast">
+          <h5>6-DAYS FORECAST</h5>
+          <div id="forecast-box">
+            <% for (const date in forecastData) { %>
+              <div class="weather-forecast-box">
+                <div class="day-weather">
+                  <span><%= forecastData[date].day_today %></span>
+                </div>
+                <div class="weather-icon-forecast">
+                  <img src="images/<%= forecastData[date].weatherImg %>.png" />
+                </div>
+                <div class="temp-weather">
+                  <span><%= forecastData[date].temperature %></span>
+                </div>
+                <div class="weather-main-forecast"><%= forecastData[date].description %></div>
               </div>
-            </div>
-          </div>
-        </div>
-        <!-- Today-forecast -->
-        <div class="forcasts-box">
-          <div class="today-forecast">
-            <h4>TODAY</h4>
-            <div class="weather-icon-today">
-              <img class="weather-icons" src="images/sun.png" />
-            </div>
-            <div class="temp-today">
-              <span id="temp-min-today">50°</span><span>/ </span
-              ><span id="temp-max-today">55°</span>
-            </div>
-            <div class="weather-main-today" id="weather-main">Sunnen</div>
-          </div>
-
-          <!-- 5day Forecast -->
-          <div class="forecast">
-            <h5>6-DAYS FORECAST</h5>
-            <div id="forecast-box"></div>
+            <% } %>
           </div>
         </div>
       </div>
     </div>
-    <!-- script -->
-  </body>
-
-  <%- include('partials/footer.ejs') %>
-
-
+  </div>
+</body>
+<%- include('partials/footer.ejs') %>
